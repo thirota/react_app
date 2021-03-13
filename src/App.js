@@ -1,15 +1,25 @@
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return <div>
-    <h1 className="bg-primary text-white display-4">React</h1>
-    <div className="container">
-      <p className="subtitle">This is sample component.</p>
-      <p>これはサンプルのコンポーネントです。</p>
-      <p>簡単なメッセージを表示します。</p>
-    </div>
-  </div>
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.title = props.title;
+    this.message = props.message;
+  }
+
+  render() {
+    return <div>
+      <h1 className="bg-primary text-white display-4">React</h1>
+      <div className="container">
+        <p className="subtitle">{this.title}</p>
+        <p>{this.message}</p>
+      </div>
+    </div>    
+  }
+
 }
 
 export default App;
