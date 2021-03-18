@@ -1,76 +1,46 @@
 import React, { useState } from 'react';
 import './App.css';
+import usePersist from './Persist'
 
-// 合計計算の関数
-const total = (max)=> {
-  let result = 0
-  for (let i = 0; i <= max; i++) {
-    result += i
-  }
-  return result
-}
-
-// 消費税計算の関数
-const tax = (price)=> {
-  return Math.floor(price * 1.1)
-}
-
-/**
- * 数値を計算し、メッセージを返す独自フック関数
- * @param {*} num 数値
- * @param {*} func 数値計算関数
- * @returns 
- */
-function useCalc(num=0, func = (arg)=>{return arg}) {
-  const [msg, setMsg] = useState(null)
-
-  const setValue = (price)=> {
-    let result = func(price)
-    setMsg(<p className="h5">{price}の結果は{result}です。</p>)
-  }
-
-  return [msg, setValue]
-}
-
-// デフォルトコンポーネント
-function PlainMessage(props) {
-  const [msg, setCalc] = useCalc()
-
-  const doChange = (event)=>  {
-    setCalc(event.target.value)
-  }
-
-  return <div className="p-3 h5">
-    <h5>{msg}</h5>
-    <input type="number" onChange={doChange} className="form-control"/>
-  </div>
-}
-
-// 合計計算コンポーネント
 function AlertMessage(props) {
-  const [msg, setCalc] = useCalc(0, total)
+  const [name, setName] = useState("")
+  const [mail, setMail] = useState("")
+  const [age, setAge] = useState(0)
+  const [mydata, setMydata] = usePersist("mydata", null)
 
-  const doChange = (event)=>  {
-    setCalc(event.target.value)
+  const onChangeName = (event)=>  {
+    setName(event.target.value)
+  }
+  const onChangeMail = (event)=>  {
+    setMail(event.target.value)
+  }
+  const onChangeAge = (event)=>  {
+    setAge(event.target.value)
+  }
+  const onAction = (event)=> {
+    const data = {
+      name: name,
+      mail: mail,
+      age: age
+    }
+    setMydata(data)
   }
 
   return <div className="alert alert-primary h5 text-primary">
-    <h5>{msg}</h5>
-    <input type="number" onChange={doChange} min="0" max="10000" className="form-control"/>
-  </div>
-}
-
-// 消費税計算コンポーネント
-function CardMessage(props) {
-  const [msg, setCalc] = useCalc(0, tax)
-
-  const doChange = (event)=>  {
-    setCalc(event.target.value)
-  }
-
-  return <div className="alert alert-primary h5 text-primary">
-    <h5>{msg}</h5>
-    <input type="range" onChange={doChange} min="0" max="10000" step="100" className="form-control"/>
+    <h5 className="mb-4">{JSON.stringify(mydata)}</h5>
+    <div className="form-group">
+      <label className="h6">Name</label>
+      <input type="text" onChange={onChangeName} className="form-control"/>
+    </div>
+    <div className="form-group">
+      <label className="h6">Mail</label>
+      <input type="text" onChange={onChangeMail} className="form-control"/>
+    </div>
+    <div className="form-group">
+      <label className="h6">Age</label>
+      <input type="number" onChange={onChangeAge} className="form-control"/>
+    </div>
+    <button onClick={onAction} className="btn btn-primary">Save</button>
   </div>
 }
 
@@ -81,9 +51,7 @@ function App() {
       <h1 className="bg-primary text-white display-4">React</h1>
       <div className="container">
         <h4 className="my-3">Hooks sample</h4>
-        <PlainMessage/>
         <AlertMessage/>
-        <CardMessage/>
       </div>
     </div>
   )
