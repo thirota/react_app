@@ -18,11 +18,11 @@ function DelForm(props) {
         setNum(0)
     }
 
-    let items = memo.map((value, key)=>{
+    let items = memo.map((value, key)=>(
         <option key={key} value={key}>
             {value.message.substring(0,10)}
         </option>
-    })
+    ))
 
     return (
         <form onSubmit={doAction}>

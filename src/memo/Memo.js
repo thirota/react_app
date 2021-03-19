@@ -12,20 +12,20 @@ function Memo(props) {
     switch (mode) {
         case 'default':
             // all
-            data  = memo.map((value, key)=>{
+            data  = memo.map((value, key)=>(
                 <Item key={value.message} value={value} index={key + 1}/>
-            })
+            ))
             break;
         case 'find':
             // fmemo only
-            data  = fmemo.map((value, key)=>{
+            data  = fmemo.map((value, key)=>(
                 <Item key={value.message} value={value} index={key + 1}/>
-            })
+            ))
             break;
         default:
-            data  = memo.map((value, key)=>{
+            data  = memo.map((value, key)=>(
                 <Item key={value.message} value={value} index={key + 1}/>
-            })
+            ))
             break;    
     }
 
