@@ -1,17 +1,17 @@
+import React, {Component} from 'react'
 import './App.css';
-import MemoPage from './memo/MemoPage'
 
-function App() {
-  return (
-    <div>
+class App extends Component {
+  render() {
+    return <div>
       <h1 className="bg-primary text-white display-4">React</h1>
       <div className="container">
-        <h4 className="my-3">Memo.</h4>
-        <MemoPage/>
+        <p className="subtitle">This is sample component.</p>
+        <p>これはサンプルです</p>
+        <p>メッセージです</p>
       </div>
     </div>
-  )
-
+  }
 }
 
 export default App;
