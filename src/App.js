@@ -6,15 +6,19 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      msg:'Hello',
-      count:0,
+      msg:'count start',
+      counter:0,
     }
-    let timer = setInterval(()=>{
-      this.setState({
-        count: this.state.count + 1,
-        msg: "[count: " + this.state.count + "]"
-      })
-    }, 1000)
+    //bind
+    this.doAction = this.doAction.bind(this)
+  }
+
+  doAction(event) {
+    console.log(event)
+    this.setState({
+      counter: this.state.counter + 1,
+      msg: "*** count: " + this.state.counter + " ***"
+    })
   }
 
   render() {
@@ -23,7 +27,7 @@ class App extends Component {
       <div className="container">
         <p className="subtitle">Count number</p>
         <p className="alert alert-warning">{this.state.msg}</p>
-        <p className="alert alert-dark">{this.props.msg}</p>
+        <button className="btn btn-primary" onClick={this.doAction}>Click</button>
       </div>
     </div>
   }
