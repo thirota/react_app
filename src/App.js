@@ -28,7 +28,7 @@ class App extends Component {
       <h1 className="bg-primary text-white display-4">React</h1>
       <div className="container">
         <p className="subtitle">Count number</p>
-        {this.state.flg ?
+        {(this.state.counter % 2) ?
         <p className="alert alert-warning">{this.state.msg}</p>
         :
         <p className="alert alert-primary">{this.state.msg}</p>
