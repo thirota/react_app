@@ -6,25 +6,17 @@ class App extends Component {
 
   constructor(props) {
     super(props)
+    //XXX Do we need to use the state??
     this.state = {
       title:'input form',
-      message:'type your name'
+      message:'type your name',
+      max:10
     }
-    this.doChange = this.doChange.bind(this)
-    this.doSubmit = this.doSubmit.bind(this)
+    this.doCheck = this.doCheck.bind(this)
   }
 
-  doChange(event) {
-    this.input = event.target.value
-  }
-
-  doSubmit(event) {
-    this.setState({
-      title:'send form',
-      message:'Hello, ' + this.input + ' !'
-    })
-    //XXX
-    event.preventDefault()
+  doCheck(event) {
+    alert(event.target.value + " is too long. (max: " + this.state.max + " chars)")
   }
 
   render() {
@@ -32,16 +24,7 @@ class App extends Component {
       <h1 className="bg-primary text-white display-4">React</h1>
       <div className="container">
         <h4>{this.state.title}</h4>
-        <p className="card h5 p-3">{this.state.message}</p>
-        <div className="alert alert-primary mt-3">
-          <form onSubmit={this.doSubmit}>
-            <div className="form-group">
-              <label>Message:</label>
-              <input type="text" className="form-control" onChange={this.doChange} required pattern="[A-Za-z _,.]+"/>
-            </div>
-            <input type="submit" className="btn btn-primary" value="Click"/>
-          </form>
-        </div>
+        <Message maxlength={this.state.max} onCheck={this.doCheck}/>
       </div>
     </div>
   }
@@ -49,21 +32,23 @@ class App extends Component {
 
 class Message extends Component {
 
-  render() {
-    let content = this.props.children
-    let tokens = content.split('。')
-    let array = []
-    for (let i = 0; i < tokens.length; i++) {
-      if (tokens[i].trim() !== '') {
-        array.push(tokens[i])
-      }
+  constructor(props) {
+    super(props)
+    this.doChange = this.doChange.bind(this)
+  }
+
+  doChange(event) {
+    if (event.target.value.length > this.props.maxlength) {
+      //XXX hard to understand...
+      this.props.onCheck(event)
+      event.target.value = event.target.value.substr(0, this.props.maxlength)
     }
-    let list = array.map((value,index)=>(
-      <li className="list-group-item" key={index}>{index+1}. {value}.</li>
-    ))
-    return <div>
-      <h2>{this.props.title}</h2>
-      <ol className="list-group">{list}</ol>
+  }
+
+  render() {
+    return <div className="form-group">
+      <label>input:</label>
+      <input type="text" className="form-control" onChange={this.doChange}></input>
     </div>
   }
 
