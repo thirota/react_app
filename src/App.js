@@ -2,29 +2,12 @@ import React, {Component} from 'react'
 import './App.css';
 
 class App extends Component {
-  input = ''
-
-  constructor(props) {
-    super(props)
-    //XXX Do we need to use the state??
-    this.state = {
-      title:'input form',
-      message:'type your name',
-      max:10
-    }
-    this.doCheck = this.doCheck.bind(this)
-  }
-
-  doCheck(event) {
-    alert(event.target.value + " is too long. (max: " + this.state.max + " chars)")
-  }
-
   render() {
     return <div>
       <h1 className="bg-primary text-white display-4">React</h1>
       <div className="container">
-        <h4>{this.state.title}</h4>
-        <Message maxlength={this.state.max} onCheck={this.doCheck}/>
+        <h4>input form</h4>
+        <Message maxlength="10" />
       </div>
     </div>
   }
@@ -39,8 +22,7 @@ class Message extends Component {
 
   doChange(event) {
     if (event.target.value.length > this.props.maxlength) {
-      //XXX hard to understand...
-      this.props.onCheck(event)
+      alert(event.target.value + " is too long. (max: " + this.props.maxlength + " chars)")
       event.target.value = event.target.value.substr(0, this.props.maxlength)
     }
   }
