@@ -2,11 +2,9 @@ import React, {Component} from 'react'
 import './App.css';
 
 let data = {
-  title:'React-Context',
-  message:'This is sample message.'
+  title:'React-Context2',
+  message:'This is sample message2.'
 }
-
-const sampleContext = React.createContext(data)
 class App extends Component {
   render() {
     return <div>
@@ -20,24 +18,20 @@ class App extends Component {
 }
 
 class Title extends Component {
-  static contextType = sampleContext
-
   render() {
     return (
       <div className="card p-2 my-3">
-        <h2>{this.context.title}</h2>
+        <h2>{data.title}</h2>
       </div>
     )
   }
 }
 
 class Message extends Component {
-  static contextType = sampleContext
-
   render() {
     return (
       <div className="alert alert-primary">
-        <p>{this.context.message}</p>
+        <p>{data.message}</p>
       </div>
     )
   }
