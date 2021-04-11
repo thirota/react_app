@@ -1,37 +1,45 @@
 import React, {Component} from 'react'
 import './App.css';
 
+let data = {
+  title:'React-Context',
+  message:'This is sample message.'
+}
+
+const sampleContext = React.createContext(data)
 class App extends Component {
   render() {
     return <div>
       <h1 className="bg-primary text-white display-4">React</h1>
       <div className="container">
-        <h4>input form</h4>
-        <Message maxlength="10" />
+        <Title/>
+        <Message/>
       </div>
     </div>
   }
 }
 
-class Message extends Component {
-
-  constructor(props) {
-    super(props)
-    this.doChange = this.doChange.bind(this)
-  }
-
-  doChange(event) {
-    if (event.target.value.length > this.props.maxlength) {
-      alert(event.target.value + " is too long. (max: " + this.props.maxlength + " chars)")
-      event.target.value = event.target.value.substr(0, this.props.maxlength)
-    }
-  }
+class Title extends Component {
+  static contextType = sampleContext
 
   render() {
-    return <div className="form-group">
-      <label>input:</label>
-      <input type="text" className="form-control" onChange={this.doChange}></input>
-    </div>
+    return (
+      <div className="card p-2 my-3">
+        <h2>{this.context.title}</h2>
+      </div>
+    )
+  }
+}
+
+class Message extends Component {
+  static contextType = sampleContext
+
+  render() {
+    return (
+      <div className="alert alert-primary">
+        <p>{this.context.message}</p>
+      </div>
+    )
   }
 
 }
