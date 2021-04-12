@@ -1,55 +1,60 @@
 import React, {Component} from 'react'
 import './App.css';
 
-let data = {
-  title:'React-Context3',
-  message:'This is sample message3.'
+let theme = {
+  light:{
+    styles:{
+      backgroundColor:"#f0f9ff",
+      color:"#00f"
+    },
+    head:"bg-primary text-white display-4 mb-4",
+    alert:"alert alert-primary"
+  },
+  dark:{
+    styles:{
+      backgroundColor:"#336",
+      color:"#eef"
+    },
+    head:"bg-secondary text-white display-4 mb-4",
+    alert:"alert alert-dark"
+  }
 }
 
-const sampleContext = React.createContext(data)
+const ThemeContext = React.createContext(theme.dark)
 class App extends Component {
-  newData = {
-    title:'New Title',
-    message:'New Message'
-  }
+  static contextType = ThemeContext
 
   render() {
-    return <div>
-      <h1 className="bg-primary text-white display-4">React</h1>
+    return <div style={this.context.styles}>
+      <h1 className={this.context.head}>React</h1>
       <div className="container">
-        <Title/>
-        <Message/>
-        <hr/>
-        <sampleContext.Provider value={this.newData}>
-          <Title/>
-          <Message/>
-        </sampleContext.Provider>
-        <Title/>
-        <Message/>
+        <Title value="Content page"/>
+        <Message value="This is content sample"/>
+        <Message value="サンプルですよ"/>
       </div>
     </div>
   }
 }
 
 class Title extends Component {
-  static contextType = sampleContext
+  static contextType = ThemeContext
 
   render() {
     return (
-      <div className="card p-2 my-3">
-        <h2>{this.context.title}</h2>
+      <div className={this.context.alert}>
+        <h2 style={this.context.styles}>{this.props.value}</h2>
       </div>
     )
   }
 }
 
 class Message extends Component {
-  static contextType = sampleContext
+  static contextType = ThemeContext
 
   render() {
     return (
-      <div className="alert alert-primary">
-        <p>{this.context.message}</p>
+      <div style={this.context.styles}>
+        <p>{this.props.value}</p>
       </div>
     )
   }
