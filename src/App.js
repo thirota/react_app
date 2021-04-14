@@ -1,44 +1,21 @@
 import React, {useState} from 'react'
 import './App.css';
 
+function AlertMessage() {
+  return <div className="alert alert-primary h5 text-primary">This is alert message.</div>
+}
+
+function CardMessage() {
+  return <div className="card p-3 h5 border-primary text-center">This is card message.</div>
+}
+
 function App() {
-  console.log("App start")
-  const [count, setCount] = useState(0)
-  const [flag, setFlag] = useState(false)
-
-  const changeFlag = (e)=> {
-    console.log("changeFlag start")
-    setFlag(e.target.checked)
-  }
-
-  const clickFunc = ()=> {
-    console.log("clickFunc start")
-    setCount(count+1)
-  }
-
   return <div>
     <h1 className="bg-primary text-white display-4">React</h1>
     <div className="container">
       <h4 className="my-3">Hook sample</h4>
-      {flag ?
-      <div className="alert alert-primary text-center">
-        <p className="h5 mb-3">click: {count} times!</p>
-        <div>
-          <button className="btn btn-primary" onClick={clickFunc}>Click me</button>
-        </div>
-      </div>
-      :
-      <div className="card p-3 border-primary text-center">
-        <p className="h5 mb-3 text-left text-primary">click: {count} times!</p>
-        <div>
-          <button className="btn btn-primary" onClick={clickFunc}>Click me</button>
-        </div>
-      </div>
-      }
-      <div className="form-group h6 text-center pt-3">
-        <input type="checkbox" className="form-check-input" id="check1" onChange={changeFlag}/>
-        <label className="form-check-label" htmlCheck="check1">Change form style</label>
-      </div>
+      <AlertMessage/>
+      <CardMessage/>
     </div>
   </div>
 }
