@@ -10,12 +10,22 @@ function CardMessage(props) {
 }
 
 function App() {
+  console.log("App start")
+
+  const [msg, setMsg] = useState("This is sample message.")
+
+  const doAction = ()=> {
+    let res = window.prompt('type your name:')
+    setMsg("Hello " + res + " !!")
+  }
+
   return <div>
     <h1 className="bg-primary text-white display-4">React</h1>
     <div className="container">
       <h4 className="my-3">Hook sample</h4>
-      <AlertMessage message="Hogehoge" />
-      <CardMessage message="Fugafuga" />
+      <AlertMessage message={msg} />
+      <CardMessage message={msg} />
+      <button onClick={doAction}>Click</button>
     </div>
   </div>
 }
