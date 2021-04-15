@@ -12,9 +12,9 @@ function AlertMessage(props) {
     <hr/>
     <table className="table h6">
       <tbody>
-        <tr><th>Name</th></tr><td>{data.name}</td>
-        <tr><th>Mail</th></tr><td>{data.mail}</td>
-        <tr><th>Age</th></tr><td>{data.age}</td>
+        <tr><th>Name</th><td>{data.name}</td></tr>
+        <tr><th>Mail</th><td>{data.mail}</td></tr>
+        <tr><th>Age</th><td>{data.age}</td></tr>
       </tbody>
     </table>
     </div>
@@ -53,7 +53,7 @@ function App() {
     <h1 className="bg-primary text-white display-4">React</h1>
     <div className="container">
       <h4 className="my-3">Hook sample</h4>
-      <AlertMessage data={form} setData={setForm}/>
+      <AlertMessage data={form} />
       <form onSubmit={doSubmit}>
         <div className="form-group">
           <label>Name:</label>
