@@ -20,10 +20,12 @@ function App() {
   }
 
   useEffect(()=> {
+    console.log("useEffect start")
     let total = 0
     for (let i = 0; i <= val; i++) {
       total += i
     }
+    //XXX Is it okay that set state within hook?
     setMsg("total: " + total + ".")
   })
 
