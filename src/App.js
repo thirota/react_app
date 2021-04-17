@@ -15,7 +15,7 @@ function App() {
   const [val, setVal] = useState(1000)
   const [tax1, setTax1] = useState(0)
   const [tax2, setTax2] = useState(0)
-  const [msg, setMsg] = useState('<p>set a number...</p>')
+  const [msg, setMsg] = useState(<p>set a number...</p>)
 
   const doChange = (e)=> {
     setVal(e.target.value)
