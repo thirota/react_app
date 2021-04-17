@@ -22,12 +22,13 @@ function App() {
   }
 
   useEffect(()=>{ 
+    console.log("useEffect")
     let res = <div>
       <p>軽減税率: {tax1} 円</p>
       <p>通常税率: {tax2} 円</p>
     </div>
     setMsg(res)
-  })
+  }, [tax1, tax2])
 
   useEffect(()=> {
     console.log("useEffect1")
