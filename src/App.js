@@ -21,13 +21,13 @@ function App() {
     setVal(e.target.value)
   }
 
-  const doAction = (e)=>{ 
+  useEffect(()=>{ 
     let res = <div>
       <p>軽減税率: {tax1} 円</p>
       <p>通常税率: {tax2} 円</p>
     </div>
     setMsg(res)
-  }
+  })
 
   useEffect(()=> {
     console.log("useEffect1")
@@ -48,7 +48,6 @@ function App() {
         <label>Input</label>
         <input type="number" onChange={doChange} className="form-control"/>
       </div>
-      <button className="btn btn-primary" onClick={doAction}>Calc</button>
     </div>
   </div>
 }
