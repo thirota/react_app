@@ -1,8 +1,16 @@
 import React, {useState} from 'react'
 import './App.css';
 
+//This function name is wrong.
+//function funcCounter() {
+//
+//React Hook "useState" is called in function "funcCounter" that is neither a React function component nor a custom React Hook function.
+//React component names must start with an uppercase letter  react-hooks/rules-of-hooks
+//
+//see also https://ja.reactjs.org/docs/hooks-rules.html
+//
 function useCounter() {
-  console.log("useCounter")
+    console.log("useCounter")
 
   const [num, setNum] = useState(0)
 
