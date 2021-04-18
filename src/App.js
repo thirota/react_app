@@ -7,6 +7,7 @@ function useCounter() {
   const [num, setNum] = useState(0)
 
   const count = ()=> {
+    console.log("count")
     setNum(num + 1)
   }
 
