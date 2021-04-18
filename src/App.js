@@ -9,27 +9,37 @@ import './App.css';
 //
 //see also https://ja.reactjs.org/docs/hooks-rules.html
 //
-function useCounter() {
-    console.log("useCounter")
+const useTax = (t1, t2)=> {
+  console.log("useTax start")
 
-  const [num, setNum] = useState(0)
+  const [price, setPrice] = useState(1000)
+  const [tx1] = useState(t1)
+  const [tx2] = useState(t2)
 
-  const count = ()=> {
-    console.log("count")
-    setNum(num + 1)
+  const tax = ()=> {
+    return Math.floor(price * (1.0 + tx1/100))
   }
 
-  return [num, count]
+  const reduced = ()=> {
+    return Math.floor(price * (1.0 + tx2/100))
+  }
+
+  return [price, tax, reduced, setPrice]
 }
 
 function AlertMessage(props) {
   console.log("AlertMessage start")
 
-  const [counter, plus] = useCounter()
+  const [price, tax, reduced, setPrice] = useTax(10, 8)
+
+  const doChange = (e)=> {
+    setPrice(e.target.value)
+  }
 
   return <div className="alert alert-primary h5 text-primary">
-    <h4>count: {counter}</h4>
-    <button onClick={plus} className="btn btn-primary">count</button>
+    <p className="h5">通常：¥ {tax()}</p>
+    <p className="h5">軽減：¥ {reduced()}</p>
+    <input type="number" onChange={doChange} value={price}/>
   </div>
 }
 
