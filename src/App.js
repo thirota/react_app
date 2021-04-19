@@ -1,20 +1,6 @@
 import React, {useState} from 'react'
 import './App.css';
 
-//合計計算の関数
-const total = (a)=> {
-  let re = 0
-  for (let i = 0; i <= a; i++) {
-    re += i
-  }
-  return re
-}
-
-//消費税計算の関数
-const tax = (a)=> {
-  return Math.floor(a * 1.1)
-}
-
 //数値を計算してメッセージを返す独自フック関数
 function useCalc(num=0, func=(a)=>{return a}) {
   const [msg, setMsg] = useState(null)
@@ -47,7 +33,14 @@ function PlainMessage(props) {
 function AlertMessage(props) {
   console.log("AlertMessage start")
 
-  const [msg, setCalc] = useCalc(0, total)
+  //合計計算の関数
+  const [msg, setCalc] = useCalc(0, (a)=> {
+    let re = 0
+    for (let i = 0; i <= a; i++) {
+      re += i
+    }
+    return re
+  })
 
   const onChange = (e)=> {
     setCalc(e.target.value)
@@ -64,7 +57,10 @@ function AlertMessage(props) {
 function CardMessage(props) {
   console.log("CardMessage start")
 
-  const [msg, setCalc] = useCalc(0, tax)
+  //消費税計算の関数
+  const [msg, setCalc] = useCalc(0, (a)=> {
+    return Math.floor(a * 1.1)
+  })
 
   const onChange = (e)=> {
     setCalc(e.target.value)
