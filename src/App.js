@@ -1,58 +1,93 @@
 import React, {useState} from 'react'
 import './App.css';
 
-//This function name is wrong.
-//function funcCounter() {
-//
-//React Hook "useState" is called in function "funcCounter" that is neither a React function component nor a custom React Hook function.
-//React component names must start with an uppercase letter  react-hooks/rules-of-hooks
-//
-//see also https://ja.reactjs.org/docs/hooks-rules.html
-//
-const useTax = (t1, t2)=> {
-  console.log("useTax start")
-
-  const [price, setPrice] = useState(1000)
-  const [tx1] = useState(t1)
-  const [tx2] = useState(t2)
-
-  const tax = ()=> {
-    return Math.floor(price * (1.0 + tx1/100))
+//合計計算の関数
+const total = (a)=> {
+  let re = 0
+  for (let i = 0; i <= a; i++) {
+    re += i
   }
-
-  const reduced = ()=> {
-    return Math.floor(price * (1.0 + tx2/100))
-  }
-
-  return [price, tax, reduced, setPrice]
+  return re
 }
 
+//消費税計算の関数
+const tax = (a)=> {
+  return Math.floor(a * 1.1)
+}
+
+//数値を計算してメッセージを返す独自フック関数
+function useCalc(num=0, func=(a)=>{return a}) {
+  const [msg, setMsg] = useState(null)
+
+  const setValue = (p)=> {
+    let res = func(p)
+    setMsg(<p className="h5">* {p} の結果は、{res} です。</p>)
+  }
+
+  return [msg, setValue]
+}
+
+//デフォルトコンポーネント
+function PlainMessage(props) {
+  console.log("PlainMessage start")
+
+  const [msg, setCalc] = useCalc()
+
+  const onChange = (e)=> {
+    setCalc(e.target.value)
+  }
+
+  return <div className="p-3 h5">
+    <h5>{msg}</h5>
+    <input type="number" onChange={onChange} className="form-control"/>
+  </div>
+}
+
+//合計計算コンポーネント
 function AlertMessage(props) {
   console.log("AlertMessage start")
 
-  const [price, tax, reduced, setPrice] = useTax(10, 8)
+  const [msg, setCalc] = useCalc(0, total)
 
-  const doChange = (e)=> {
-    setPrice(e.target.value)
+  const onChange = (e)=> {
+    setCalc(e.target.value)
   }
 
   return <div className="alert alert-primary h5 text-primary">
-    <p className="h5">通常：¥ {tax()}</p>
-    <p className="h5">軽減：¥ {reduced()}</p>
-    <input type="number" onChange={doChange} value={price}/>
+    <h5>{msg}</h5>
+    <input type="number" onChange={onChange} className="form-control" min="0" max="10000"/>
   </div>
+
 }
 
+//消費税計算コンポーネント
+function CardMessage(props) {
+  console.log("CardMessage start")
+
+  const [msg, setCalc] = useCalc(0, tax)
+
+  const onChange = (e)=> {
+    setCalc(e.target.value)
+  }
+
+  return <div className="card p-3 h5 text-primary">
+    <h5>{msg}</h5>
+    <input type="range" onChange={onChange} className="form-control" min="0" max="10000"/>
+  </div>
+
+}
+
+//ベースコンポーネント
 function App() {
   console.log("App start")
 
-  return <div>
-    <h1 className="bg-primary text-white display-4">React</h1>
-    <div className="container">
-      <h4 className="my-3">Hook sample</h4>
-      <AlertMessage />
+  return (
+    <div>
+      <PlainMessage/>
+      <AlertMessage/>
+      <CardMessage/>
     </div>
-  </div>
+  )
 }
 
 export default App;
