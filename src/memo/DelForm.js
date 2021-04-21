@@ -2,6 +2,8 @@ import React, { useState, useEffect, memo } from 'react'    // XXX what is memo?
 import usePersist from '../Persist'
 
 function DelForm(props) {
+    console.log("AddForm start")
+
     const [memo, setMemo] = usePersist("memo", [])
     const [num, setNum] = useState(0)
 

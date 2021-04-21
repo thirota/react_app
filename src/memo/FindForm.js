@@ -2,6 +2,8 @@ import React, { useState, useEffect, memo } from 'react'
 import usePersist from '../Persist'
 
 function FindForm(props) {
+    console.log("FindForm start")
+
     const [memo, steMemo] = usePersist("memo", [])
     const [fmemo, setFMemo] = usePersist("findMemo", [])
     const [message, setMessage] = useState('')

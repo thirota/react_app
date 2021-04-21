@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 function Item(props) {
+    console.log("Item start")
+
     const th = {
         width: "100px"
     }
@@ -9,6 +11,7 @@ function Item(props) {
         width: "150px"
     }
     let d = new Date(Date.parse(props.value.created))
+    // TODO format (zero padding, etc.)
     let f = d.getMonth() + '/' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes()
 
     return (

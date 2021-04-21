@@ -5,6 +5,8 @@ import FindForm from './FindForm'
 import DelForm from './DelForm'
 
 function MemoPage() {
+    console.log("MemoPage start")
+
     const [mode, setMode] = usePersist('mode', 'default')
 
     return (
