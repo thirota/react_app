@@ -1,6 +1,6 @@
 import './App.css';
 import MemoPage from './memo/MemoPage'
-import Button from '@atlaskit/button/standard-button';
+import Button, { ButtonGroup } from '@atlaskit/button';
 
 function App() {
   console.log("App start")
@@ -11,7 +11,15 @@ function App() {
       <div className="container">
         <h4 className="my-3">Memo</h4>
         <MemoPage />
-        <Button appearance="primary">This is AtlasKit Button</Button>
+        <ButtonGroup>
+          <Button appearance="primary">Default</Button>
+          <Button appearance="primary" spacing="compact">
+            Compact
+          </Button>
+          <Button spacing="none" appearance="subtle-link">
+            None
+          </Button>
+        </ButtonGroup>
       </div>
     </div>
   )
